@@ -1,8 +1,19 @@
 import React from 'react'
-// import { hot } from 'react-hot-loader/root'
+import styled from 'styled-components'
+
+import { Synth } from './components/index'
+
+const StyledHeader = styled.h1`
+  color: #ff0000;
+`
 
 const App = () => {
-  return <h1 data-testid="app">Beep beep boop</h1>
+  return (
+    <>
+      <StyledHeader data-testid="app">Beep beep boop</StyledHeader>
+      <Synth />
+    </>
+  )
 }
 
 export default App
