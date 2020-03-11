@@ -3,9 +3,9 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
-import App from './app.jsx'
+import Key from './Key.jsx'
 
 test('it renders the app', () => {
-  const { getByTestId } = render(<App />)
-  expect(getByTestId('app')).toBeInTheDocument()
+  const { getByText } = render(<Key name="A" keyboardKey="q" />)
+  expect(getByText('q/A')).toBeInTheDocument()
 })

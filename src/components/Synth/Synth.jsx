@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
-// Keyboard generation 
+// components
+import {Key} from '../index'
+
+// keyboard generation 
 import GetKeyTuples from './keyboardGen/keys'
 
 // create web audio api context
@@ -16,8 +19,6 @@ class KEY {
     this.freqMap = new Map()
   }
 
-  // I can't take credit for this but - it's bascally lifted from this stunning 
-  // live demo: https://www.youtube.com/watch?v=JON6X6Wmteo 
   startPlaying() {
     if (this.freqMap.has(this.pitch)) return
     const oscillator = audioCtx.createOscillator() // oscillator instance
@@ -35,7 +36,7 @@ class KEY {
 }
 
 const generateKeys = () => {
-  const keyArr = GetKeyTuples(19, "A", 4).map(i => i.flat(1))
+  const keyArr = GetKeyTuples(20, "A", 4).map(i => i.flat(1))
   const keys = keyArr.map(i => new KEY(...i))
   return keys
 }
@@ -46,9 +47,12 @@ const keyArr = generateKeys()
 const Keys = () => {
   const divArr = keyArr.map(i => {
     return (
-      <div data-key={i.key} />
+      <div data-key={i.key} key={`key_${i.name}.${i.key}`}>
+        <Key keyboardKey={i.key} name={i.name} />
+      </div>
     )
   })
+  console.log(divArr)
   return <>{divArr}</>
 }
 
@@ -78,9 +82,9 @@ const Synth = () => {
       <div>LEFT PADDING</div>
       <div>CONTROLS</div>
       <div>RIGHT PADDING</div>
-      <div>
+      <StyledKeys>
         <Keys />
-      </div>
+      </StyledKeys>
     </StyledSynth>
   )
 }
@@ -93,8 +97,15 @@ const StyledSynth = styled.div`
   grid-template-areas:
     'lPadding controls rPadding'
     'lPadding keyboard rPadding';
-
+  grid-template-columns: auto 80% auto;
   width: 100%;
   min-height: 600px;
   background-color: #232222;
+`
+
+const StyledKeys = styled.div`
+  grid-area: keyboard;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%
 `
