@@ -6,9 +6,9 @@ import { StyledKey } from './Key.styled'
 const Key = ({ keyboardKey, name }) => {
   return (
     <StyledKey name={name}>
-      <span>
+      <div>
         {keyboardKey}/{name}
-      </span>
+      </div>
     </StyledKey>
   )
 }

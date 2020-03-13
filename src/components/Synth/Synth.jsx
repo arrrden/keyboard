@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 // components
-import {Key} from '../index'
+import {Key, Controls} from '../index'
 
 // keyboard generation 
 import GetKeyTuples from './keyboardGen/keys'
@@ -35,24 +35,29 @@ class KEY {
   }
 }
 
-const generateKeys = () => {
+// Generate array of piano keys on keyboard
+const keyArr = (() => {
   const keyArr = GetKeyTuples(20, "A", 4).map(i => i.flat(1))
   const keys = keyArr.map(i => new KEY(...i))
   return keys
-}
+})()
 
-const keyArr = generateKeys()
-
+// FIXME: Something broke this and now it doesn't make soundz
+// // Component take the array of Key classes and maps a reference to an object (span) in the DOM
+// // Any keyboard event shouldn't reallty be affected by this!?
+// // The KeyWrapper and Key key components define styling with different specificity 
 // create a key in the DOM
 const Keys = () => {
+  console.log(keyArr)
   const divArr = keyArr.map(i => {
     return (
-      <div data-key={i.key} key={`key_${i.name}.${i.key}`}>
-        <Key keyboardKey={i.key} name={i.name} />
-      </div>
+      <span data-key={i.key} key={`key_${i.name}.${i.key}`}>
+        <KeyWrapper >
+          <Key keyboardKey={i.key} name={i.name} />
+        </KeyWrapper>
+      </span>
     )
   })
-  console.log(divArr)
   return <>{divArr}</>
 }
 
@@ -61,8 +66,9 @@ const Synth = () => {
   useEffect(() => {
     let audio
     let eventKey
+    debugger
     window.addEventListener('keydown', e => {
-      audio = document.querySelector(`div[data-key="${e.key}"]`)
+      audio = document.querySelector(`span[data-key="${e.key}"]`)
       eventKey = e.key
       if (!audio) return
       keyArr.find(i => i.key === e.key).startPlaying()
@@ -79,12 +85,15 @@ const Synth = () => {
 
   return (
     <StyledSynth>
-      <div>LEFT PADDING</div>
-      <div>CONTROLS</div>
-      <div>RIGHT PADDING</div>
+      <LeftPadding />
+      <Controls />
+      <RightPadding />
       <StyledKeys>
+        <div style={{margin: "auto", height: "100%", transform: "translateX(0.6rem)"}}>
         <Keys />
+        </div>
       </StyledKeys>
+
     </StyledSynth>
   )
 }
@@ -97,15 +106,46 @@ const StyledSynth = styled.div`
   grid-template-areas:
     'lPadding controls rPadding'
     'lPadding keyboard rPadding';
-  grid-template-columns: auto 80% auto;
+  grid-template-columns: auto auto auto;
   width: 100%;
-  min-height: 600px;
-  background-color: #232222;
+  height: 400px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #d74732, #ff553c);
+  box-shadow: 20px 20px 60px #b13a29, 
+              -20px -20px 60px #ff6447,
+              inset 0 0 2px #ee3f26;
+  padding: 1rem;
 `
 
 const StyledKeys = styled.div`
   grid-area: keyboard;
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%
+  display: grid;
+  margin: 0 2rem;
+`
+
+const KeyWrapper = styled.li`
+  margin:0;
+  padding:0;
+  height: 100%;
+  list-style:none;
+  position:relative;
+  float:left;
+`
+
+const LeftPadding = styled.div`
+  grid-area: lPadding;
+  height: 100%;
+  width: 6rem;
+  border-radius: 40px 0 0 40px;
+  background-color: rgb(0, 0, 0, 0.1); 
+  box-shadow: inset 0 0 10px rgb(0, 0, 0, 0.1);
+`
+
+const RightPadding = styled.div`
+  grid-area: rPadding;
+  height: 100%;
+  width: 6rem;
+  border-radius: 0 40px 40px 0;
+  background-color: rgb(0, 0, 0, 0.1); 
+  box-shadow: inset 0 0 10px rgb(0, 0, 0, 0.1);
 `
