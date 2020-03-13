@@ -42,10 +42,6 @@ const keyArr = (() => {
   return keys
 })()
 
-// FIXME: Something broke this and now it doesn't make soundz
-// // Component take the array of Key classes and maps a reference to an object (span) in the DOM
-// // Any keyboard event shouldn't reallty be affected by this!?
-// // The KeyWrapper and Key key components define styling with different specificity 
 // create a key in the DOM
 const Keys = () => {
   console.log(keyArr)
@@ -66,7 +62,6 @@ const Synth = () => {
   useEffect(() => {
     let audio
     let eventKey
-    debugger
     window.addEventListener('keydown', e => {
       audio = document.querySelector(`span[data-key="${e.key}"]`)
       eventKey = e.key
@@ -107,6 +102,7 @@ const StyledSynth = styled.div`
     'lPadding controls rPadding'
     'lPadding keyboard rPadding';
   grid-template-columns: auto auto auto;
+  grid-template-rows: 50% 50%;
   width: 100%;
   height: 400px;
   border-radius: 50px;

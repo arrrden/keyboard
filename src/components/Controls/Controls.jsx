@@ -1,15 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
+import styled from 'styled-components'
+
+import Counter from './children/Counter.jsx'
 
 const Controls = () => {
-  const [noOfKeys, setNoOfKeys] = useState(12)
-
   return (
-    <div>
-      <button onClick={() => setNoOfKeys(noOfKeys + 1)}>Increment</button>
-      <button onClick={() => setNoOfKeys(noOfKeys - 1)}>Decrement</button>
-      <h1>{noOfKeys}</h1>
-    </div>
+    <ControlsContainer>
+      <Visualiser />
+      <Counter title="number of keys" />
+      <Counter title="octave" />
+    </ControlsContainer>
   )
 }
 
 export default Controls
+
+const ControlsContainer = styled.div`
+  padding: 2rem 1.4rem 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
+const Visualiser = styled.div`
+  height: 7rem;
+  width: 300px;
+  background-color: #222223;
+`
