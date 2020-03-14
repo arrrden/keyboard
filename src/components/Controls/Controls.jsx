@@ -26,5 +26,7 @@ const ControlsContainer = styled.div`
 const Visualiser = styled.div`
   height: 7rem;
   width: 300px;
-  background-color: #222223;
+  border-radius: 3px;
+  background: #222223;
+  box-shadow: inset 5px 5px 19px #1e1e1f, inset -5px -5px 19px #262627;
 `

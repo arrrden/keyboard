@@ -32,6 +32,7 @@ const CounterContainer = styled.div`
   grid-template-areas: 'left right';
   width: 7rem;
   height: 7rem;
+  color: #222223;
 
   h2 {
     text-align: center;
@@ -52,11 +53,11 @@ const TitleContainer = styled.div`
 
   padding: 0.4rem 0;
   position: absolute;
-  width: 8rem;
+  width: 7rem;
   top: 0;
   left: 0;
-  transform-origin: 25% 70%;
-  transform: rotate(-270deg);
+  transform-origin: 60% 0%;
+  transform: rotate(-270deg) translateX(4.6rem);
 
   h2 {
     font-size: 1rem;
@@ -73,6 +74,7 @@ const Button = styled.button`
   border: none;
   width: 100%;
   display: grid;
+  color: #222223;
 
   span {
     margin: auto;

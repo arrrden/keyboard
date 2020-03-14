@@ -50,7 +50,7 @@ export const StyledWhiteKey = styled.div`
 export const StyledBlackKey = styled.div`
   width: 2rem;
   height: 70%;
-  background-color: #101010;
+  background-color: #222223;
   margin: 0 0 0 -1.4em;
   z-index: 7;
   position: relative;
