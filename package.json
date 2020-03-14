@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack --mode=development",
+    "poststart": "npm run dev",
     "dev": "webpack-dev-server",
     "build": "webpack --mode=production"
   },
