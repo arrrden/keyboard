@@ -31,6 +31,7 @@ class KEY {
   stopPlaying() {
     const oscillator = this.freqMap.get(this.pitch)
     oscillator?.stop()
+    if (this.freqMap.size === 0) clear(300, 100)
     this.freqMap.delete(this.pitch)
   }
 }
@@ -44,7 +45,6 @@ const keyArr = (() => {
 
 // create a key in the DOM
 const Keys = () => {
-  console.log(keyArr)
   const divArr = keyArr.map(i => {
     return (
       <span data-key={i.key} key={`key_${i.name}.${i.key}`}>
@@ -62,7 +62,7 @@ const Synth = () => {
   useEffect(() => {
     let audio
     let eventKey
-    window.addEventListener('keydown', e => {
+    window.addEventListener('keypress', e => {
       audio = document.querySelector(`span[data-key="${e.key}"]`)
       eventKey = e.key
       if (!audio) return
@@ -73,7 +73,7 @@ const Synth = () => {
       keyArr.find(i => i.key === e.key).stopPlaying()
     })
     return () => {
-      window.removeEventListener('keydown')
+      window.removeEventListener('keypress')
       window.removeEventListener('keyup')
     }
   }, [])
