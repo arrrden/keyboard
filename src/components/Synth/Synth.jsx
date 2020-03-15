@@ -7,8 +7,9 @@ import {Key, Controls} from '../index'
 // keyboard generation 
 import GetKeyTuples from './keyboardGen/keys'
 
-// create web audio api context
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+//Oscilloscope
+import {audioCtx, analyser} from '../../audioAPI/ctx'
+import {draw} from '../../audioAPI/analyser'
 
 // describe a new oscillator for any given key
 class KEY {
@@ -24,14 +25,15 @@ class KEY {
     const oscillator = audioCtx.createOscillator() // oscillator instance
     oscillator.frequency.setValueAtTime(this.pitch, audioCtx.currentTime)
     oscillator.connect(audioCtx.destination)
+    oscillator.connect(analyser)
     oscillator.start()
     this.freqMap.set(this.pitch, oscillator)
+    draw()
   }
 
   stopPlaying() {
     const oscillator = this.freqMap.get(this.pitch)
     oscillator?.stop()
-    if (this.freqMap.size === 0) clear(300, 100)
     this.freqMap.delete(this.pitch)
   }
 }

@@ -6,7 +6,11 @@ import Counter from './children/Counter.jsx'
 const Controls = () => {
   return (
     <ControlsContainer>
-      <Visualiser />
+      <Visualiser>
+        <div style={{ margin: 'auto' }}>
+          <canvas height="90px" width="290px" />
+        </div>
+      </Visualiser>
       <Counter title="number of keys" />
       <Counter title="octave" />
     </ControlsContainer>
@@ -28,5 +32,7 @@ const Visualiser = styled.div`
   width: 300px;
   border-radius: 3px;
   background: #222223;
+  display: flex;
+  justify-content: space-evenly;
   box-shadow: inset 5px 5px 19px #1e1e1f, inset -5px -5px 19px #262627;
 `
