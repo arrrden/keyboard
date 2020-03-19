@@ -2,8 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Counter from './children/Counter.jsx'
+import Button from './children/Button.jsx'
+
+import { useKeyState, useKeyDispatch } from '../../context/keys.ctx'
+import { useOctaveState, useOctaveDispatch } from '../../context/octave.ctx'
 
 const Controls = () => {
+  const { keys } = useKeyState()
+  const { octave } = useOctaveState()
+  const keyDispatch = useKeyDispatch()
+  const octaveDispatch = useOctaveDispatch()
+
   return (
     <ControlsContainer>
       <Visualiser>
@@ -11,8 +20,32 @@ const Controls = () => {
           <canvas height="90px" width="290px" />
         </div>
       </Visualiser>
-      <Counter title="number of keys" />
-      <Counter title="octave" />
+      <Counter title="keys / octave">
+        <Button>
+          <button onClick={() => keyDispatch({ type: 'increment' })}>
+            <span>&#9650;</span>
+          </button>
+        </Button>
+        <h2>{keys}</h2>
+        <Button>
+          <button onClick={() => keyDispatch({ type: 'decrement' })}>
+            <span>&#9660;</span>
+          </button>
+        </Button>
+      </Counter>
+      <Counter title="octave no.">
+        <Button>
+          <button onClick={() => octaveDispatch({ type: 'increment' })}>
+            <span>&#9650;</span>
+          </button>
+        </Button>
+        <h2>{octave}</h2>
+        <Button>
+          <button onClick={() => octaveDispatch({ type: 'decrement' })}>
+            <span>&#9660;</span>
+          </button>
+        </Button>
+      </Counter>
     </ControlsContainer>
   )
 }
