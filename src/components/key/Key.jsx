@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { StyledKey } from './Key.styled'
 
@@ -6,7 +7,7 @@ import { StyledKey } from './Key.styled'
 const Key = ({ keyboardKey, name }) => {
   return (
     <StyledKey name={name}>
-      <div>
+      <div id={keyboardKey} style={{ width: '100%', textAlign: 'center' }}>
         {keyboardKey}/{name}
       </div>
     </StyledKey>

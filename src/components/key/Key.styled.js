@@ -48,7 +48,7 @@ export const StyledWhiteKey = styled.div`
 `
 
 export const StyledBlackKey = styled.div`
-  width: 2rem;
+  width: 2.2rem;
   height: 70%;
   background-color: #222223;
   margin: 0 0 0 -1.4em;

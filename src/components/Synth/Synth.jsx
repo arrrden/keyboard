@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 // components
@@ -69,10 +69,16 @@ const Synth = () => {
       eventKey = e.key
       if (!audio) return
       keyArr.find(i => i.key === e.key).startPlaying()
+      const styleKey = document.getElementById(eventKey)
+      if (styleKey.classList.contains('active')) return 
+      styleKey.classList.add('active')
     })
     window.addEventListener('keyup', e => {
       if (e.key !== eventKey) return
       keyArr.find(i => i.key === e.key).stopPlaying()
+      const styleKey = document.getElementById(eventKey)
+      styleKey.classList.remove('active')
+      console.log(styleKey)
     })
     return () => {
       window.removeEventListener('keypress')
@@ -113,6 +119,14 @@ const StyledSynth = styled.div`
               -20px -20px 60px #ff6447,
               inset 0 0 2px #ee3f26;
   padding: 1rem;
+
+  .active {
+    border-bottom: 5px solid #b00b1e;
+    transition-duration: 0.2s;
+    border-radius: 0 0 3px 3px;
+  }
+
+  }
 `
 
 const StyledKeys = styled.div`
