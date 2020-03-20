@@ -11,7 +11,7 @@ That's cool, however, what if more notes? or fewer? The distance between any two
 - For the given user input of a starting pitch (note name), octave number (usually between 1-8), and number of keyboard keys, the app should generate a keyboard and map the keyboard piano keys to the users keyboard keys. 
 - There should be a corresponding visual representation of the keyboard in the view that instructs the user on which key should be pressed to play each note ✅
 - Pressing a key will correspond with a visual cue ✅
-- Each piano keys listen for keyboard events and play a tone on keydown ✅
+- Each piano key listens for keyboard events and plays a tone on keydown ✅
 - Pressing multiple keys will produce chords ✅
 
 ### Extended features
